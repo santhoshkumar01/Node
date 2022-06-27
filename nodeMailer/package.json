@@ -11,7 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.0.1",
+    "fs": "0.0.1-security",
     "googleapis": "^104.0.0",
-    "nodemailer": "^6.7.5"
+    "nodemailer": "^6.7.5",
+    "nodemailer-handlebars": "^1.0.1"
   }
 }

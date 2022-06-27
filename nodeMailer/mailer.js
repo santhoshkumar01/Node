@@ -1,7 +1,7 @@
 require('dotenv').config()
 const nodemailer = require('nodemailer');
 const { google } = require('googleapis');
-var data = require('index.html')
+var fs = require('fs');
 
 const oAuth2Client = new google.auth.OAuth2(
     process.env.CLIENT_ID,
@@ -26,16 +26,21 @@ async function sendMail() {
             },
         });
 
-        const mailOptions = {
-            from: process.env.EMAIL,
-            to: 'arun@cygnusinnovations.com,nikhil@cygnusinnovations.com,vijay@cygnusinnovations.com,santhosh@cygnusinnovations.com,phanikondru@gmail.com,caksl1999@gmail.com,Panduyash1999@gmail.com',
-            subject: 'Naakoncham tikkundi, kaani daaniko lekkundi. ...',
-            text: 'Naakoncham tikkundi, kaani daaniko lekkundi. ...',
-            html: 'data',
-        };
-
-        const result = await transport.sendMail(mailOptions);
-        return result;
+        fs.readFile('index.html', { encoding: 'utf-8' }, function (err, html) {
+            if (err) {
+                console.log(err);
+            } else {
+                const mailOptions = {
+                    from: process.env.EMAIL,
+                    to: 'arun@cygnusinnovations.com,nikhil@cygnusinnovations.com,vijay@cygnusinnovations.com,santhosh@cygnusinnovations.com,phanikondru@gmail.com,caksl1999@gmail.com,Panduyash1999@gmail.com',
+                    subject: 'Happy birthday!',
+                    text: 'Happy birthday! I hope all your birthday wishes and dreams come true',
+                    html: html,
+                };
+                const result =  transport.sendMail(mailOptions);
+                return result;
+            }
+        })
     } catch (error) {
         return error;
     }
