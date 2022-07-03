@@ -1,7 +1,7 @@
 require('dotenv').config()
 const nodemailer = require('nodemailer');
 const { google } = require('googleapis');
-var data = require('index.html')
+var data = require('./index.html')
 
 const oAuth2Client = new google.auth.OAuth2(
     process.env.CLIENT_ID,
@@ -28,10 +28,11 @@ async function sendMail() {
 
         const mailOptions = {
             from: process.env.EMAIL,
-            to: 'arun@cygnusinnovations.com,nikhil@cygnusinnovations.com,vijay@cygnusinnovations.com,santhosh@cygnusinnovations.com,phanikondru@gmail.com,caksl1999@gmail.com,Panduyash1999@gmail.com',
-            subject: 'Naakoncham tikkundi, kaani daaniko lekkundi. ...',
-            text: 'Naakoncham tikkundi, kaani daaniko lekkundi. ...',
-            html: 'data',
+            to: 'santhosh@cygnusdigitalinnovations.com',
+            // to: 'arun@cygnusinnovations.com,nikhil@cygnusinnovations.com,vijay@cygnusinnovations.com,santhosh@cygnusinnovations.com,phanikondru@gmail.com,caksl1999@gmail.com,Panduyash1999@gmail.com',
+            subject: 'Orange',
+            text: 'sydney nagaram chese neeram innalu ninnu dhachunchindhi sigge paduthu thappe thelisiee rojaina chupinchindhi',
+            html: data,
         };
 
         const result = await transport.sendMail(mailOptions);
