@@ -1,5 +1,5 @@
 var mongoose = require('mongoose')
-const crypto=require('crypto')
+const crypto = require('crypto')
 
 var userSchema = new mongoose.Schema({
     name: {
@@ -41,11 +41,11 @@ var userSchema = new mongoose.Schema({
 userSchema.method = {
     securePassword: function (plainPassword) {
         if (!plainPassword) return ''
-        try{
-return createHmac('sha256', this.salt)
-.update(plainPassword)
-.digest('hex');
-        }catch(e){
+        try {
+            return createHmac('sha256', this.salt)
+                .update(plainPassword)
+                .digest('hex');
+        } catch (e) {
             return ""
         }
     }
