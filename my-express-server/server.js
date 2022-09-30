@@ -1,12 +1,13 @@
 const express = require('express')
 
 const app = express()
+const PORT=3000
 
 app.get('/',(req,res)=>{
-    // console.log(req.url);
+ console.log(req.url);
     res.send('Home!')
 })
 
-app.listen(3000, () => {
-    console.log('SERVER IS UP & RUNNING!');
+app.listen(PORT, () => {
+    console.log(`SERVER IS UP & RUNNING! at ${PORT}`);
 })
