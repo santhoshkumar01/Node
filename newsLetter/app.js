@@ -34,15 +34,22 @@ app.post('/signUp', (req, res) => {
     const url = "https://us11.api.mailchimp.com/3.0/lists/e15e3e337c"
     const options = {
         method: "POST",
-        auth: "Santh0shhh1:fd8d2a94f77b14c7c113e1d4a29c6120-us11"
+        auth: "Santh0shhh1:c5ef3ef9d80d12284f45796263a65ff9-us11"
     }
     const request = https.request(url, options, (response) => {
+
+        // if (response.statusCode === 200) {
+        //     res.send("Successfully subscribed!");
+        // } else {
+        //     res.send("Please Try Again After Sometime!");
+        // }
+
         response.on('data', (data) => {
             console.log(JSON.parse(data))
         })
     })
     request.write(jsonData)
-    request.end() 
+    request.end()
 })
 
 app.listen(PORT, () => {
