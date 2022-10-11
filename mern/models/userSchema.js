@@ -38,7 +38,7 @@ const userSchema = new Schema({
         type: Array,
         default: []
     }
-})
+}, { timestamps: true })
 
 //plainPassword+salt=hash
 
