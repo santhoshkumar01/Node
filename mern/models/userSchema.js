@@ -25,7 +25,6 @@ const userSchema = new Schema({
         type: String,
         trim: true
     },
-    //COME BACK
     encryptedPassword: {
         type: true,
         required: true
@@ -54,10 +53,12 @@ userSchema.virtual('password')
     })
 
 userSchema.method = {
+    authenticate: function () {
+        return this.securePassword === this.encryptedPassword
+    },
     securePassword: function (plainPassword) {
         if (!plainPassword) { return }
         try {
-
             return crypto.createHmac('sha256', this.salt)
                 .update(plainPassword)
                 .digest('hex')
