@@ -55,8 +55,8 @@ userSchema.virtual('password')
     })
 
 userSchema.methods = {
-    authenticate: function () {
-        return this.securePassword === this.encryptedPassword
+    authenticate: function (plainPassword) {
+        return this.securePassword(plainPassword) === this.encryptedPassword
     },
     securePassword: function (plainPassword) {
         if (!plainPassword) { return }
