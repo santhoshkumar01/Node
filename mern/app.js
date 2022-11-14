@@ -6,7 +6,10 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')//Cross Origin Resource Sharing
 
+
+//My Routes
 const authRoutes = require('./routes/authenticate')
+const userRoutes = require('./routes/user')
 
 
 // DB Connect
@@ -27,6 +30,7 @@ app.use(cors())
 
 //My Routes
 app.use('/api', authRoutes)
+app.use('/api', userRoutes)
 // http://localhost:8000/api/signOut
 
 //Port

@@ -32,9 +32,9 @@ exports.signIn = (req, res) => {
     const { email, password } = req.body
 
     User.findOne({ email }, (error, user) => {
-        if (error) {
-            res.status(400).json({
-                message: "User Email Not Found!"
+        if (error || !user) {
+            return res.status(400).json({
+                message: "User Not Found!"
             })
         }
 
@@ -45,6 +45,7 @@ exports.signIn = (req, res) => {
         }
         //createToken
         var token = jwt.sign({ _id: user._id }, 'mernStack', { expiresIn: '30d' })
+
         //Put it in Cookie
         res.cookie('token', token, { expiresIn: new Date() + 9999 })
 
@@ -55,16 +56,40 @@ exports.signIn = (req, res) => {
             token,
             user: { _id, firstName, lastName, email, role }
         })
-
-
-
     })
 
 }
 
+//protectedRoute
+exports.isSignedIn = expressJwt({
+    secret: 'mernStack',
+    userProperty: 'auth'
+})
+
+//customMiddleWare
+exports.isAuthenticated = (req, res, next) => {
+    const checker = req.profile && req.auth && req.profile._id == req.auth._id
+    if (!checker) {
+        return res.status(403).json({
+            error: 'Access Denied'
+        })
+    }
+    next()
+}
+
+exports.isAdmin = (req, res, next) => {
+    if (req.profile.role === 0) {
+        return res.status(403).json({
+            error: "You're Not ADMIN"
+        })
+    }
+    next()
+}
+
 exports.signOut = (req, res) => {
+    res.clearCookie('token')
     res.json({
         status: true,
-        message: 'User SignOut'
+        message: 'User SignedOut'
     })
 }
