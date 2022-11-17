@@ -71,3 +71,38 @@ app.listen(PORT, () => {
 //         })
 // }
 // export default API_ENDPOINTS
+
+
+
+// const Person = function (fName, bYear) {
+//     this.fName = fName
+//     this.bYear = bYear
+// }
+
+// const nikhil = new Person('Nikhil', 1998)
+// console.log(nikhil);
+
+// Person.prototype.calcAge = function () {
+//     console.log('7777',2022 - this.bYear);
+// }
+// nikhil.calcAge()
+
+
+const Car = function (carSpeed) {
+    this.carSpeed = carSpeed
+}
+
+Car.prototype.accelerateSpeed = function() {
+    console.log('SPEED', this.carSpeed + 10);
+}
+Car.prototype.applyBreak = function() {
+    console.log("BREAK", this.carSpeed - 5);
+}
+
+// const bmw = new Car(100)
+
+const merc = new Car(150)
+
+merc.accelerateSpeed()
+merc.applyBreak()
+
